@@ -13,22 +13,14 @@ function renderButton() {
 var auth = (function() {
 
 	var id_token = '';
-<<<<<<< HEAD
 	var username = '';
 
 	function onSignIn(googleUser) {
 		var profile = googleUser.getBasicProfile();
-=======
-
-	function onSignIn(googleUser) {
-		var profile = googleUser.getBasicProfile();
-		//console.log(googleUser.getBasicProfile());
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 		events.emit('onSignIn', profile.getName());
 
 		//save this somewhere so it can be accessed later.
 		id_token = googleUser.getAuthResponse().id_token;
-<<<<<<< HEAD
 		username = profile.getName();
 		$.ajax({
 			type: 'POST',
@@ -39,17 +31,6 @@ var auth = (function() {
 				// emit the correct with the corresponding message
 				// events.emit(data.message, data);
 				console.log(data);
-=======
-
-		$.ajax({
-			type: 'POST',
-			url: '/',	//window.location.pathname
-			data: {id_token: id_token},
-			success: function(data) {
-				// emit the correct with the corresponding message
-				// events.emit(data.message, data);
-				//console.log(data);
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 			}
 		});
 	}
@@ -65,21 +46,14 @@ var auth = (function() {
 	function getIdToken() {
 		return id_token;
 	}
-<<<<<<< HEAD
 	function getUsername() {
 		return username;
 	}
-=======
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 	return {
 		onSignIn: onSignIn,
 		onSignInFailure: onSignInFailure,
 		signOut: signOut,
-<<<<<<< HEAD
 		getIdToken: getIdToken,
 		getUsername: getUsername
-=======
-		getIdToken: getIdToken
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 	}
 })();

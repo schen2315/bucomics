@@ -1,35 +1,4 @@
 extends layout
 
 block content
-<<<<<<< HEAD
 
-=======
-  -var style="color:red";
-  h1(style=style) title
-  h1= title
-  p Welcome to Binghamton Comic Club!
-  button(type="button" value="CLICKIT") CLICKIT
-  script(type='text/javascript' src='/javascripts/jquery-2.2.0.min.js')
-  script.
-    var person = {
-    	firstName: "Song",
-    	lastName: "Chen",
-    	fullName: function() {
-    		console.log(this.firstName + " " + this.lastName);
-    		console.log(person.firstName + " " + person.lastName);
-    	}
-    }
-    //if 'this' is used inside function A then
-    //'this' contains the value of the object that invokes function A
-    //we need this to access the properties of the object that 
-    //invokes function A
-    var anotherPerson = {
-    	firstName: "Rohit",
-    	lastName: "Khan"
-    }
-    person.fullName();
-    person.fullName.apply(anotherPerson);
-    $("button").click(function() {
-    	console.log($(this));
-    });
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d

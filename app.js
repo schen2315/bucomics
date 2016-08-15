@@ -4,10 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-<<<<<<< HEAD
 var busboy = require('connect-busboy');
-=======
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
+
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/BingComics');
@@ -15,10 +13,6 @@ mongoose.connect('mongodb://localhost:27017/BingComics');
 var routes = require('./routes/index');
 var profile = require('./routes/profile');
 var comics = require('./routes/comics');
-<<<<<<< HEAD
-=======
-var artwork = require('./routes/artwork');
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 var error = require('./routes/error');
 
 var app = express();
@@ -30,7 +24,6 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-<<<<<<< HEAD
 //app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: true }));
 app.use(busboy());
@@ -43,17 +36,6 @@ app.use(function(err, req, res, next) {
 app.use('/', routes);
 app.use('/profile', profile);
 app.use('/comics', comics);
-=======
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', routes);
-app.use('/profile', profile);
-app.use('/comics', comics);
-app.use('/artwork', artwork);
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 //if no pages exist
 app.use(function(req, res, next) {
   res.render('error', {})

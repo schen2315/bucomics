@@ -1,10 +1,6 @@
 # ignore the data/ directory because it contains the actual content of users
 # data/ is the database of the entire application and becomes very big
-<<<<<<< HEAD
-data/**
-=======
 data/** 
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 **/.DS_Store
 **/decisions.txt
 public/comics/**

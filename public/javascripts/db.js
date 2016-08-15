@@ -1,16 +1,10 @@
 var User = require('./../../models/user');
 var Comics = require('./../../models/comics');
 var _ = require('underscore');
-<<<<<<< HEAD
 var isValidURL  = require('./isValidURL');
 var db = (function() {
 
 	function doesUserExist(auth, callback) {
-=======
-var db = (function() {
-
-	function doesUserExist(auth) {
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 		User.find({sub: auth.sub}, function(err, user) {
 			if(err) throw err;
 			if(_.isEmpty(user)) {
@@ -25,7 +19,6 @@ var db = (function() {
 				})
 				newUser.save(function(err) {
 					if(err) throw err;
-<<<<<<< HEAD
 					callback(auth.name + " was added!");
 				});
 			} else {
@@ -118,40 +111,12 @@ var db = (function() {
 	//may change function name to JUST comics (db.comics)
 	function getComics(url, callback) {
 		//THIS SHIT NEEDS To GET REWRITTEN
-=======
-					console.log(auth.name + " was added!");
-				});
-			} else {
-				console.log(user);
-			}
-		});
-	}
-	function addComics(opts) {
-		//after the user has been authenticated.
-		//update the user's comics/artwork array
-		//add a comics/artwork document to the collection
-
-		//opts.title
-		//opts.sub --> identifies the user
-		//opts.description
-	}
-	function getProfile(auth) {
-		// var data = {};
-		// User.find({sub: auth.sub}, function() {
-		// 	data.comics = user.comics
-		// 	data.artwork = user.artwork
-		// });
-		// return data;
-	}
-	function getComics(res, url) {
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 		var data = {};
 		//return object to pass into the render function
 		url = url.split("/");
 		url.splice(0, 1);
 		url[1] = url[1] ? parseInt(url[1]) : 1;	//chapter
 		url[2] = url[2] ? parseInt(url[2]) : 1;	//page
-<<<<<<< HEAD
 		Comics.find({url: url[0]}).lean().exec(function(err, comics) {
 			if(err) throw err;
 			if(_.isEmpty(comics)) {
@@ -160,35 +125,16 @@ var db = (function() {
 				return
 			}
 			comics = comics[0];
-
-=======
-		console.log(url);
-		Comics.find({url: url[0]}).lean().exec(function(err, comics) {
-			if(err) throw err;
-			var len = 0;
-			for(c in comics) {
-				if(!comics.hasOwnProperty(c)) continue;
-				len++;
-			}
-			if(len > 1) throw new Error("more than one comic was matched");
-			comics = comics[0];
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 			data.url = url;
 			data.title = comics.title;
 			data.description = comics.description;
 			data.chapterList = [];
 			data.pagesList = 0;
 			data.author = comics.author;
-<<<<<<< HEAD
 			data.chapter = url[1] - 1;
 			data.pagesrc = "/comics/" + url[0] + "/" + url[1] + "/" +
 				comics.chapters[url[1] - 1][url[2] - 1];
 			/*
-=======
-			data.chapter = comics.chapters[url[1] - 1].title;
-			data.pagesrc = "/comics/" + url[0] + "/" + url[1] + "/" +
-				comics.chapters[url[1] - 1].pages[url[2] - 1];
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 			//next page or next chapter	
 			if(comics.chapters[url[1] - 1].pages[url[2]]) {
 				data.nextpage = "/comics/" + url[0] + "/" + url[1] + "/" + 
@@ -215,24 +161,16 @@ var db = (function() {
 				if(!comics.chapters[url[1] - 1].pages.hasOwnProperty(pg)) continue;
 				data.pagesList++;
 			}
-<<<<<<< HEAD
 			*/
 			callback(data);
-=======
-			res.render( 'view', data);
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 		});
 	}
 
 	return {
 		doesUserExist: doesUserExist,
-<<<<<<< HEAD
 		upload: upload,
 		update: update,
 		del: del,
-=======
-		addComics: addComics,
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 		getProfile: getProfile,
 		getComics: getComics
 	}

@@ -9,17 +9,12 @@ div.navbar.navbar-inverse.navbar-fixed-top
     div.collapse.navbar-collapse
       ul.nav.navbar-nav
         li: a(href="/comics") Comics
-<<<<<<< HEAD
-=======
-        li: a(href="/artwork") Artwork
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
         li: a: div(id="my-signin2")
         li(style="display:none").dropdown.nav-user
           a.dropdown-toggle(data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") User
             span.caret
           ul.dropdown-menu
             li.dropdown.dropdown-submenu
-<<<<<<< HEAD
               a(href="/profile" data-toggle="dropdown").dropdown-toggle Operations
               ul.dropdown-menu
                 li: a(href="#" data-toggle="modal" data-target="#upload_Dialog") Upload
@@ -30,14 +25,6 @@ div.navbar.navbar-inverse.navbar-fixed-top
 
 //why are the upload dialogs here?
 //shouldn't they be in profile.jade
-=======
-              a(href="#" data-toggle="dropdown").dropdown-toggle Upload
-              ul.dropdown-menu
-                li: a(href="#" data-toggle="modal" data-target="#upload_Dialog") Comic
-                li: a(href="#" data-toggle="modal" data-target="#upload_Dialog") Artwork
-            li: a(href="/profile") Profile
-            li.sign-out: a(href="/") Sign Out
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 //upload_Dialog
 div#upload_Dialog.modal.fade(role="dialog")
   div.modal-dialog
@@ -47,7 +34,6 @@ div#upload_Dialog.modal.fade(role="dialog")
         h4.modal-title Upload, Yay!
       div.modal-body
         //enctype, method are important for the ajax submit to work properly
-<<<<<<< HEAD
         form(enctype="multipart/form-data" method="post" action="/profile/upload/")
           div
             span Title
@@ -72,19 +58,6 @@ div#upload_Dialog.modal.fade(role="dialog")
       div.modal-footer
         button.btn.btn-default(type="button" data-dismiss="modal") Close
 //on Upload, Update, delete
-=======
-        form(enctype="multipart/form-data" method="post" action="/profile/upload/comics")
-          div
-            input.title(type="text" name="name")
-            textarea.description(rows="4" cols="50")
-            br
-            button.btn.btn-default.new_page(type="button") Add Page
-          ul
-          input(type="submit" value="Upload")
-      div.modal-footer
-        button.btn.btn-default(type="button" data-dismiss="modal") Close
-//on Upload
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 div#onUpload.modal.fade(role="dialog")
   div.modal-dialog
     div.modal-content

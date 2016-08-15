@@ -5,7 +5,6 @@ var client2db = require('./../public/javascripts/client2db');
 var db = require('./../public/javascripts/db');
 var randomstring = require('randomstring');
 var multer = require('multer');
-<<<<<<< HEAD
 var parseFiles = require('./../public/javascripts/parseFiles');
 var parser = require('./../public/javascripts/parser');
 var path = require('path');
@@ -15,30 +14,11 @@ var rimraf = require('rimraf');
 var fs = require('fs');
 
 //user profile page
-=======
-var storageEngine = require('./../public/javascripts/storageEngine');
-// var storage = storageEngine({
-// 	destination: function(req, file, cb) {
-// 		cb(null, './../public/comics/' + file.originalname);
-// 	}
-// });
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './../public/comics')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now());
-  }
-})
-var upload = multer({storage: storage}).single('userPhoto');
-
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 router.get('/', function(req, res, next) {
 	//check that a user is logged in
 	//something to figure out later ...
 	res.render('profile', {});
 });
-<<<<<<< HEAD
 //authenticate user
 router.post('/', function(req, res, next) {
 	parser(req, '/profile', function() {
@@ -87,34 +67,6 @@ router.post('/upload', function(req, res, next) {
 				});
 			}
 		});
-=======
-router.post('/', function(req, res, next) {
-	var token = req.body.id_token;
-	client2db('/profile', token, function(data) {
-		res.send(data);
-	});
-});
-router.post('/upload/artwork', function(req, res, next) {
-
-});
-router.post('/upload/comics', function(req, res, next) {
-
-	//first authenticate user
-	//call the storageEngine function in the callback 
-	//of client2db function
-	// client2db('/upload/comics', token, function(data) {
-	// 	upload(req, res, function(err) {
-	// 		if(err) return res.send("Error uploading file");
-	// 		res.send(data);
-	// 	});
-	// });
-	upload(req, res, function(err) {
-		if(err) return res.end("Error uploading file");
-		console.log(req.body);
-		console.log(req.file);
-		console.log(req.files);
-		res.end('File is uploaded');
->>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
 	});
 });
 
