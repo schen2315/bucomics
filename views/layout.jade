@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    meta(http-equiv="content-type", content="text/html;charset=UTF-8")
+    meta(name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1")
+    meta(name="google-signin-client_id" content="6211445926-lvjcjhqaq92306q1gf6tnbt97dqt0abq.apps.googleusercontent.com")
+    title= title
+
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    include ./nav.jade
+    block content
+    script(type='text/javascript' src='/javascripts/jquery-2.2.0.min.js')
+    script(type='text/javascript' src='/javascripts/bootstrap.min.js')
+    script(type='text/javascript' src='/javascripts/auth.js')
+    script(type='text/javascript' src='https://apis.google.com/js/platform.js' async defer)
+    script(type='text/javascript' src='/javascripts/events.js')
+    script(type='text/javascript' src='/javascripts/nav_render.js')
+    script(type='text/javascript' src='/javascripts/upload.js')
+    script(type='text/javascript' src="https://apis.google.com/js/platform.js?onload=renderButton" async defer)
+    block scripts
+    
+    include ./copyright.jade

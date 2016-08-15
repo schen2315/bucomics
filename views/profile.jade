@@ -1,0 +1,21 @@
+extends layout
+block content
+  div.row
+    div.col-sm-6.col-xs-6(style="float:left;")
+      h3(class="comics-list") Comics:
+      h3(class="artwork-list") Artwork:
+    div.col-sm-6.col-xs-6
+      //need to actually make this button functional sometime soon
+      br
+      a(id="upload").btn.btn-info Upload
+script(id="uploadFields" type="text/template")
+  form(id="uploadForm", enctype="multipart/form-data", method="post")
+    input(type="file", name="userPhoto", accept="image/*")
+    span name:
+    input(type="text", name="name")
+    input(type="submit", value="upload Image", name="submit")
+    span(id="status")
+block scripts
+  script(type='text/javascript' src='/javascripts/profile_render.js')
+
+

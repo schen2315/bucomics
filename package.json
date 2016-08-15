@@ -1,0 +1,39 @@
+{
+  "name": "website",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+<<<<<<< HEAD
+    "connect-busboy": "0.0.2",
+=======
+>>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "jade": "~1.11.0",
+<<<<<<< HEAD
+    "mongoose": "^4.4.15",
+    "morgan": "~1.6.1",
+    "multer": "^1.1.0",
+    "ncp": "^2.0.0",
+    "randomstring": "^1.1.4",
+    "rimraf": "^2.5.3",
+    "serve-favicon": "~2.3.0",
+    "underscore": "^1.8.3",
+    "validator": "^5.4.0"
+=======
+    "morgan": "~1.6.1",
+    "randomstring": "^1.1.4",
+    "serve-favicon": "~2.3.0",
+    "underscore": "^1.8.3"
+>>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
+  },
+  "devDependencies": {
+    "flightplan": "^0.6.13",
+    "fly": "^1.2.2"
+  }
+}

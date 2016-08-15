@@ -1,0 +1,97 @@
+div.navbar.navbar-inverse.navbar-fixed-top
+  div.container
+    div.navbar-header
+      button(type="button" data-toggle="collapse" data-target=".navbar-collapse").navbar-toggle
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a(href="/").navbar-brand Bing Comics
+    div.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li: a(href="/comics") Comics
+<<<<<<< HEAD
+=======
+        li: a(href="/artwork") Artwork
+>>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
+        li: a: div(id="my-signin2")
+        li(style="display:none").dropdown.nav-user
+          a.dropdown-toggle(data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") User
+            span.caret
+          ul.dropdown-menu
+            li.dropdown.dropdown-submenu
+<<<<<<< HEAD
+              a(href="/profile" data-toggle="dropdown").dropdown-toggle Operations
+              ul.dropdown-menu
+                li: a(href="#" data-toggle="modal" data-target="#upload_Dialog") Upload
+                li: a(href="#" data-toggle="modal" data-target="") Update
+                li: a(href="#" data-toggle="modal" data-target="") Delete
+            li: a(href="/profile") Profile
+            li.sign-out: a(href="/") Sign Out
+
+//why are the upload dialogs here?
+//shouldn't they be in profile.jade
+=======
+              a(href="#" data-toggle="dropdown").dropdown-toggle Upload
+              ul.dropdown-menu
+                li: a(href="#" data-toggle="modal" data-target="#upload_Dialog") Comic
+                li: a(href="#" data-toggle="modal" data-target="#upload_Dialog") Artwork
+            li: a(href="/profile") Profile
+            li.sign-out: a(href="/") Sign Out
+>>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
+//upload_Dialog
+div#upload_Dialog.modal.fade(role="dialog")
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        button.close(type="button" data-dismiss="modal") &times;
+        h4.modal-title Upload, Yay!
+      div.modal-body
+        //enctype, method are important for the ajax submit to work properly
+<<<<<<< HEAD
+        form(enctype="multipart/form-data" method="post" action="/profile/upload/")
+          div
+            span Title
+            br
+            input.title(type="text" name="name")
+            br
+            span Description
+            br
+            textarea.description(rows="4" cols="50")
+            br
+            span Unique URL
+            br
+            input.url(type="text" name="name")
+            br
+            ul
+              span.chapter Chapter 1:
+                br
+                button.btn.btn-default.new_page(type="button") Add Page
+            br
+            button.btn.btn-defaul(type="button") Add Chapter 
+          input(id="submit" type="button" value="Upload")
+      div.modal-footer
+        button.btn.btn-default(type="button" data-dismiss="modal") Close
+//on Upload, Update, delete
+=======
+        form(enctype="multipart/form-data" method="post" action="/profile/upload/comics")
+          div
+            input.title(type="text" name="name")
+            textarea.description(rows="4" cols="50")
+            br
+            button.btn.btn-default.new_page(type="button") Add Page
+          ul
+          input(type="submit" value="Upload")
+      div.modal-footer
+        button.btn.btn-default(type="button" data-dismiss="modal") Close
+//on Upload
+>>>>>>> 9d2c945ac55304ce69e717f7268be2b63b4e933d
+div#onUpload.modal.fade(role="dialog")
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        h4.modal-title Thanks for Uploading!
+      div.modal-body
+        p Now here's a cat (note to self: i dont have a cat yet).
+        p Once we've got your upload all set up we'll redirect to you to the homepage.
+
+
