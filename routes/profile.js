@@ -34,10 +34,13 @@ router.post('/', function(req, res, next) {
 });
 
 router.post('/upload', function(req, res, next) {
+	console.log('line 37')
 	// req.params is updated
 	parseFiles(req, '/profile/upload/', function() {
 		//first authenticate user
+		console.log('line 41')
 		client2db('/profile', req.params.id_token, function(auth) {
+			console.log('line 43')
 			if(!auth.error) {
 				//call the proper db function
 				db.upload(auth, req.params, function(data) {
