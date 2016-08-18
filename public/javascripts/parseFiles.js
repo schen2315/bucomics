@@ -32,11 +32,13 @@ var parseFiles = function(req, url, callback) {
 			description: "",
 			chapters: []
 		}
+		console.log('line 35')
+		console.log(req.params)
 		fs.mkdtemp(__dirname + '/../comics/tempdir-', function(err, tempdir) {
 			if(err) console.log(err);
 			req.params.tempdir = tempdir;	
 		    req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-
+		    	if (err) console.log(err);
 		    	fieldname = validator.escape(fieldname);
 		    	var ch_pg = fieldname.split("-");
 		    	var tempdir_1 = tempdir + '/' + ch_pg[0];
@@ -64,6 +66,7 @@ var parseFiles = function(req, url, callback) {
 		});
 	} else {
 		//error handling (BE SPECIFIC!)
+		console.log('req.busboy does not exist')
 	}
 }
 
