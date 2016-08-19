@@ -110,7 +110,6 @@ var db = (function() {
 	//send response to client
 	//may change function name to JUST comics (db.comics)
 	function getComics(url, callback) {
-		//THIS SHIT NEEDS To GET REWRITTEN
 		var data = {};
 		//return object to pass into the render function
 		url = url.split("/");
@@ -128,40 +127,44 @@ var db = (function() {
 			data.url = url;
 			data.title = comics.title;
 			data.description = comics.description;
-			data.chapterList = [];
-			data.pagesList = 0;
 			data.author = comics.author;
-			data.chapter = url[1] - 1;
-			data.pagesrc = "/comics/" + url[0] + "/" + url[1] + "/" +
-				comics.chapters[url[1] - 1][url[2] - 1];
-			/*
+			
+			if(comics.chapters[url[1] - 1][url[2] - 1]) {
+				data.chapter = url[1]; //considered chapter 1
+				data.page = url[2];
+				data.pagesrc = "/comics/" + url[0] + "/" + url[1] + "/" +
+					comics.chapters[url[1] - 1][url[2] - 1];
+				data.chapters = comics.chapters;
+				data.pages = comics.chapters[url[1] - 1].length;
+			}
+
+			data.chapters = [];
+			for(var i=0; i < comics.chapters.length; i++) {
+				data.chapters[i] = "/comics" + url[0] + "/" + (i+1).toString() 
+				+ "/1"; 
+			}
+			data.pages = [];
+			for(var i=0; i < comics.chapters[url[1] - 1].length; i++) {
+				data.pages[i] = "/comics" + url[0] + "/" + url[1] + "/" 
+				+ (i+1).toString();
+			}
 			//next page or next chapter	
-			if(comics.chapters[url[1] - 1].pages[url[2]]) {
-				data.nextpage = "/comics/" + url[0] + "/" + url[1] + "/" + 
+			if(comics.chapters[url[1] - 1][url[2]]) {
+				data.next = "/comics/" + url[0] + "/" + url[1] + "/" + 
 					(url[2] + 1).toString();
 			} else if(comics.chapters[url[1]]) {
-				data.nextpage = "/comics/" + url[0] + "/" +
+				data.next = "/comics/" + url[0] + "/" +
 					(url[1] + 1).toString() + "1";
 			}
 			//prev page or prev chapter
-			if(comics.chapters[url[1] - 1].pages[url[2] - 2]) {
-				data.prevpage = "/comics/" + url[0] + "/" + url[1] + "/" +
-					(url[2] - 1).toString();
+			if(comics.chapters[url[1] - 1][url[2] - 2]) {
+				data.prev = "/comics/" + url[0] + "/" + url[1] + "/" +
+					(url[2] - 1).toString();	
 			} else if(comics.chapters[url[1] - 2]) {
-				data.nextpage = "/comics/" + url[0] + "/" +
+				data.next = "/comics/" + url[0] + "/" +
 					(url[1] - 1).toString() + "1";
 			}
-			//get the title of every chapter
-			for(ch in comics.chapters) {
-				if(!comics.chapters.hasOwnProperty(ch)) continue;
-				data.chapterList.push(comics.chapters[ch].title);
-			}
-			//get the # of pages
-			for(pg in comics.chapters[url[1] - 1].pages) {
-				if(!comics.chapters[url[1] - 1].pages.hasOwnProperty(pg)) continue;
-				data.pagesList++;
-			}
-			*/
+
 			callback(data);
 		});
 	}

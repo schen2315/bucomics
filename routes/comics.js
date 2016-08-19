@@ -15,6 +15,7 @@ router.get('/:title/:ch/:pg', function(req,res,next) {
 });
 router.get('/:title/:ch', function(req,res,next) {
 	db.getComics(req.url, function(data) {
+		console.log(data);
 		if(!_.isEmpty(data)) res.render('view', data);
 		else res.render('error');
 	});
@@ -22,6 +23,7 @@ router.get('/:title/:ch', function(req,res,next) {
 router.get('/:title', function(req,res,next) {
 	//return just the first page
 	db.getComics(req.url, function(data) {
+		console.log(data);
 		if(!_.isEmpty(data)) res.render('view', data);
 		else res.render('error');
 	});

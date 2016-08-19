@@ -2,7 +2,8 @@ extends layout
 block content
   //render object will contain:
   //  title
-  //  chapter name
+  //  chapter 
+  //  page
   //  description
   //  img source
   //  img source for next page
@@ -13,21 +14,12 @@ block content
     h4.text-center #{chapter}
       div.row
         //I have to render options in the select tags
+        div.col-sm-6.col-xs-6   
         div.col-sm-6.col-xs-6
-          select
-            each ch in chapterList
-              option= ch
-
-        div.col-sm-6.col-xs-6
-          select
-            -var n = 1
-            while n <= pagesList 
-              options= n
-              - n++;
       hr
       //gotta render the actual comic page here and link it to the next page
-      if nextpage
-        a(id="view" href=nextpage)
+      if next
+        a(id="view" href=next)
           img(src=pagesrc).img-responsive.center-block
       else
         a(id="view" href="#")
@@ -36,9 +28,9 @@ block content
       div.row
         //must add the link functionality here from render.js
         div(class="col-sm-6 col-xs-6")
-          if prevpage
+          if prev
             a(href=prevpage class="btn btn-info") Previous Page
         div(class="col-sm-6 col-xs-6")
-          if nextpage
+          if next
             a(href=nextpage).btn.btn-info Next Page
             
