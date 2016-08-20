@@ -1,0 +1,40 @@
+//why are the upload dialogs here?
+//shouldn't they be in profile.jade
+//upload_Dialog
+div#upload_Dialog.modal.fade(role="dialog")
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        button.close(type="button" data-dismiss="modal") &times;
+        h4.modal-title Upload, Yay!
+      div.modal-body
+        //enctype, method are important for the ajax submit to work properly
+        div
+          span Title
+          br
+          input.title(type="text" name="name")
+          br
+          span Description
+          br
+          textarea.description(rows="4" cols="50")
+          br
+          span Unique URL
+          br
+          input.url(type="text" name="name")
+          br
+          ul
+        div.content(style="text-align: center")
+          div(style="text-align: center")
+            button.addCh + Chapter
+      div.modal-footer
+        button.btn.btn-default(id="submit" type="button" style="float:left") Upload
+        button.btn.btn-default(type="button" data-dismiss="modal") Close
+//on Upload, Update, delete
+div#onUpload.modal.fade(role="dialog")
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        h4.modal-title Thanks for Uploading!
+      div.modal-body
+        p Now here's a cat (note to self: i dont have a cat yet).
+        p Once we've got your upload all set up we'll redirect to you to the homepage.

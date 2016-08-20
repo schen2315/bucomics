@@ -7,6 +7,7 @@ function checkDirectory(directory, callback) {
 		//check the specific err code
 		if(err && err.errno === -2) {
 			//Create directory, call the callback
+			console.log("directory: " + directory);
 			fs.mkdir(directory, callback);
 		} else if(stats && stats.isDirectory()) {
 			//directory already exists
@@ -32,18 +33,18 @@ var parseFiles = function(req, url, callback) {
 			description: "",
 			chapters: []
 		}
-		console.log('line 35')
 		console.log(req.params)
 		fs.mkdtemp(__dirname + '/../comics/tempdir-', function(err, tempdir) {
 			if(err) console.log(err);
 			req.params.tempdir = tempdir;	
 		    req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-		    	if (err) console.log(err);
+		    	if (err) console.log(err.errno);
 		    	fieldname = validator.escape(fieldname);
 		    	var ch_pg = fieldname.split("-");
 		    	var tempdir_1 = tempdir + '/' + ch_pg[0];
+		    	console.log("ch_pg: " + fieldname);
 		    	checkDirectory(tempdir_1, function(err) {
-		    		if(err) throw err;
+		    		if(err) console.log(err.errno);
 		    		var saveTo = path.join(tempdir_1, path.basename(filename));
 					file.pipe(fs.createWriteStream(saveTo));
 					if(!req.params.chapters[ch_pg[0] -1]) {
@@ -61,6 +62,7 @@ var parseFiles = function(req, url, callback) {
 		    });
 		    req.busboy.on('finish', function() {
 		      callback();
+		      console.log(req.params);
 		    });
 		    req.pipe(req.busboy);
 		});

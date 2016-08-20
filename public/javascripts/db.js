@@ -112,6 +112,7 @@ var db = (function() {
 	function getComics(url, callback) {
 		var data = {};
 		//return object to pass into the render function
+		console.log(url);
 		url = url.split("/");
 		url.splice(0, 1);
 		url[1] = url[1] ? parseInt(url[1]) : 1;	//chapter
@@ -129,7 +130,7 @@ var db = (function() {
 			data.description = comics.description;
 			data.author = comics.author;
 			
-			if(comics.chapters[url[1] - 1][url[2] - 1]) {
+			if(comics.chapters[url[1] - 1]) {
 				data.chapter = url[1]; //considered chapter 1
 				data.page = url[2];
 				data.pagesrc = "/comics/" + url[0] + "/" + url[1] + "/" +
@@ -144,25 +145,29 @@ var db = (function() {
 				+ "/1"; 
 			}
 			data.pages = [];
+			console.log(comics.chapters);
+			console.log(url[1]);
 			for(var i=0; i < comics.chapters[url[1] - 1].length; i++) {
 				data.pages[i] = "/comics" + url[0] + "/" + url[1] + "/" 
 				+ (i+1).toString();
 			}
 			//next page or next chapter	
 			if(comics.chapters[url[1] - 1][url[2]]) {
-				data.next = "/comics/" + url[0] + "/" + url[1] + "/" + 
-					(url[2] + 1).toString();
+				var pg = (url[2]+1);
+				console.log("pg: " + pg.toString());
+				data.next = "/comics/" + url[0] + "/" + url[1] + "/" + pg; 
+
 			} else if(comics.chapters[url[1]]) {
 				data.next = "/comics/" + url[0] + "/" +
-					(url[1] + 1).toString() + "1";
+					(url[1] + 1).toString() + "/1";
 			}
 			//prev page or prev chapter
 			if(comics.chapters[url[1] - 1][url[2] - 2]) {
 				data.prev = "/comics/" + url[0] + "/" + url[1] + "/" +
 					(url[2] - 1).toString();	
 			} else if(comics.chapters[url[1] - 2]) {
-				data.next = "/comics/" + url[0] + "/" +
-					(url[1] - 1).toString() + "1";
+				data.prev = "/comics/" + url[0] + "/" +
+					(url[1] - 1).toString() + "/" + comics.chapters[url[1] - 2].length;
 			}
 
 			callback(data);
