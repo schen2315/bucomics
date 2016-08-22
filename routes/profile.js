@@ -17,6 +17,7 @@ var fs = require('fs');
 router.get('/', function(req, res, next) {
 	//check that a user is logged in
 	//something to figure out later ...
+	//first authenticate user
 	res.render('profile', {});
 });
 //authenticate user
@@ -28,11 +29,41 @@ router.post('/', function(req, res, next) {
 				res.send('authentication successful');
 			} else {
 				//error handling
+				res.send('authentication unsuccessful');
 			}
 		});
 	});
 });
-
+router.post('/content', function(req, res, next) {
+	parser(req, '/profile', function() {
+		var token = req.params.id_token;
+		client2db('/profile', token, function(auth) {
+			if(!auth.error) {
+				db.getContent(auth, function(data) {
+					res.send(data);
+				});
+			} else {
+				//error handling
+				res.send('authentication unsuccessful');
+			}
+		});
+	});
+});
+router.post('/delete', function(req, res, next) {
+	parser(req, '/profile', function() {
+		var token = req.params.id_token;
+		client2db('/profile', token, function(auth) {
+			if(!auth.error) {
+				db.del(auth, req.params, function(data) {
+					res.send(data);
+				})
+			} else {
+				//error handling
+				res.send('delete unsuccessful');
+			}
+		});
+	});
+});
 router.post('/upload', function(req, res, next) {
 	console.log('line 37')
 	// req.params is updated

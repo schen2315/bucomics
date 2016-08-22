@@ -94,15 +94,78 @@ var db = (function() {
 		
 	}
 	function del(auth, params, callback) {
+		//delete the comic
+		//pop the deleted comic entry from the user particular
+		var to_delete = params.to_delete;
+		User.find({sub: auth.sub}, function(err, user) {
+			user = user[0];
+			var owns = false,
+				at = 0;
+			for(var i=0; i< user.comics.length; i++) {
+				if(user.comics[i] == to_delete) {
+					owns = true;
+					at = i;
+					break;
+				}
+			}
+			if(owns) {
+				Comics.remove({url: to_delete}, function(err) {
+					if(err) {
+						callback(false);
+					} else {
+						user.comics.splice(at, 1);
+						user.updated_at = new Date();
+						user.save(function(err) {
+							if (err) throw err;
+							callback(true);
+						});
+					}
+				})
+			} else {
+				callback(false);
+			}
+		})
 
 	}
 	//figure out a clean way to write this out
 	//may change name to profile (db.profile)
-	function getProfile(auth, callback) {
+	function getContent(auth, callback) {
 		// var data = {};
 		// User.find({sub: auth.sub}, function(err, user) {
 		// 	data = user[0];
 		// });
+		var data = {};
+		User.find({sub: auth.sub}, function(err, user) {
+			comics = user[0].comics;
+			//for each comic
+			//console.log(comics);
+			comics[comics.length] = null;
+			for(var i=0; i < comics.length; i++) {
+				//console.log(comics[i]);
+				(function(url) {	//anonymous function not really necessary
+					Comics.find({url: url}, function(err, comic) {
+						if(err) throw err;
+						if(_.isEmpty(comic)) {
+							//data is empty
+							console.log('was empty');
+							callback(data);
+							return
+						} else if(comic === undefined) {
+							//reached last comic
+							console.log('was undefined')
+							callback(data);
+							return
+						} else {
+							comic = comic[0];
+							//console.log(comic);
+							//console.log(url);
+							data[comic.title] = comic.url;
+							//console.log(comics[i]);
+						}
+					});
+				})(comics[i]);
+			}
+		});
 	}
 	//look at the url 
 	//get info (title, chapter, etc)
@@ -173,14 +236,25 @@ var db = (function() {
 			callback(data);
 		});
 	}
-
+	function getAllComics(callback) {
+		var data = {};
+		Comics.find({}, function(err, comics) {
+			//console.log("comics: " + comics);
+			//comics = comics[0];
+			for(var i =0; i < comics.length; i++) {
+				data[comics[i].title] = comics[i].url;
+			}
+			callback(data);
+		})
+	}
 	return {
 		doesUserExist: doesUserExist,
 		upload: upload,
 		update: update,
 		del: del,
-		getProfile: getProfile,
-		getComics: getComics
+		getContent: getContent,
+		getComics: getComics,
+		getAllComics: getAllComics
 	}
 })();
 

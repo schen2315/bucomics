@@ -31,6 +31,9 @@ var auth = (function() {
 				// emit the correct with the corresponding message
 				// events.emit(data.message, data);
 				console.log(data);
+				id_token = googleUser.getAuthResponse().id_token;
+				username = profile.getName();
+				events.emit('authenticated', profile.getName());
 			}
 		});
 	}

@@ -33,6 +33,9 @@ var upload = (function() {
 	$content.delegate('button.adpg', 'click', add);
 
 	function add() {
+
+		//note to self, i can create js templates
+		//script(id="uploadFields" type="text/template")
 		var $divCh = $(this).parent();
 		var $upload = $("<input type='file' accept='image/*'>").appendTo($divCh);
 		

@@ -28,10 +28,14 @@ router.get('/:title', function(req,res,next) {
 		else res.render('error');
 	});
 });
-
-//view all user content
 router.get('/', function(req, res, next) {
 	res.render('contents', {});
+});
+//view all user content
+router.post('/', function(req, res, next) {
+	db.getAllComics(function(data) {
+		res.send(data);
+	});
 });
 
 

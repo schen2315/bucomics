@@ -1,0 +1,23 @@
+div#delete_Dialog.modal.fade(role="dialog")
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        button.close(type="button" data-dismiss="modal") &times;
+        h4 Delete!?!?
+      div.modal-body
+        //just the title of the comic
+      div.modal-footer
+        button.btn.btn-default(type="button" data-dismiss="modal") Close
+div#isyousure.modal.fade(role="dialog")
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        h4 Are you sure?!?!
+      div.modal-body
+        div.container
+          div.row
+            div.col-sm-6
+              button.cancel nah
+            div.col-sm-6
+              button.delete(style="float:left") yah
+
